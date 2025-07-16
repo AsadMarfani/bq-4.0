@@ -1,0 +1,62 @@
+# Dependency directories
+node_modules/
+**/node_modules/
+
+# Environment files
+.env
+*.env
+**/.env
+**/*.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Build output
+dist/
+build/
+**/dist/
+**/build/
+
+# Coverage results
+coverage/
+**/coverage/
+
+# Optional npm cache directory
+.npm/
+
+# Local environment overrides
+.local/
+*.local
+*.log
+
+# Mac metadata
+.AppleDouble
+.LSOverride
+
+# Test output
+test-output/
+
+# Next.js/.nuxt/etc. (if relevant)
+.next/
+.nuxt/
+out/
+
+# Temp files
+tmp/
+temp/
+*.tmp
+*.temp
