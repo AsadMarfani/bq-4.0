@@ -2,21 +2,24 @@ const Order = require('../models/Order');
 
 exports.createOrder = async (req, res) => {
   try {
-    const order = await Order.create(req.body);
+    const order = await Order.create({
+      ...req.body,
+      user: req.user.id // assign logged-in user
+    });
     res.status(201).json(order);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-exports.getOrders = async (req, res) => {
-  const orders = await Order.find().populate('products.product');
+exports.getMyOrders = async (req, res) => {
+  const orders = await Order.find({ user: req.user.id }).populate('products.product');
   res.json(orders);
 };
 
 exports.getOrderById = async (req, res) => {
-  const order = await Order.findById(req.params.id).populate('products.product');
-  if (!order) return res.status(404).json({ error: 'Order not found' });
+  const order = await Order.findOne({ _id: req.params.id, user: req.user.id }).populate('products.product');
+  if (!order) return res.status(404).json({ error: 'Order not found or unauthorized' });
   res.json(order);
 };
 

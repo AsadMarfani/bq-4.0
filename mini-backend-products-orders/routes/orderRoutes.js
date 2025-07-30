@@ -2,14 +2,18 @@ const express = require('express');
 const router = express.Router();
 const {
   createOrder,
-  getOrders,
+  getMyOrders,
   getOrderById,
   updateOrderStatus
 } = require('../controllers/orderController');
 
-router.post('/', createOrder);
-router.get('/', getOrders);
-router.get('/:id', getOrderById);
+const authenticateUser = require('../middlewares/authMiddleware');
+
+// router.use(authenticateUser); // Apply authentication middleware to all routes in this file
+
+router.post('/', authenticateUser, createOrder);
+router.get('/', authenticateUser, getMyOrders);
+router.get('/:id', authenticateUser, getOrderById);
 router.patch('/:id/status', updateOrderStatus);
 
 module.exports = router;

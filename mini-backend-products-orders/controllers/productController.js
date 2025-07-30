@@ -11,8 +11,8 @@ exports.getProducts = async (req, res) => {
     minRating,
     sortBy = 'name',
     order = 'asc',
-    pageNumber = 1,
-    pageSize = 5
+    page = 1,
+    limit = 5
   } = req.query;
 
   const filter = {};
@@ -40,10 +40,6 @@ exports.getProducts = async (req, res) => {
 
   const skip = (parseInt(page) - 1) * parseInt(limit);
 
-  console.log("Filter:", filter);
-  console.log("Sort:", sort);
-  console.log("Skip:", skip);
-  console.log("Limit:", limit);
 
   const total = await Product.countDocuments(filter);
 
