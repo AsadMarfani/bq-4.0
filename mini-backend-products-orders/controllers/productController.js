@@ -58,7 +58,15 @@ exports.getProducts = async (req, res) => {
 
 exports.createProduct = async (req, res) => {
   try {
-    const product = await Product.create(req.body);
+    const productData = req.body;
+    console.log("file : ", req.file)
+    if (req.file) {
+      productData.img = `/uploads/${req.file.filename}`; // ✅ save path
+    }
+    console.log("productData before save :", productData);
+    const product = await Product.create(productData);
+    console.log("productData after save :", product);
+
     res.status(201).json(product);
   } catch (err) {
     res.status(400).json({ error: err.message });
